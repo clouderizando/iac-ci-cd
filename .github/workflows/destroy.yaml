@@ -24,9 +24,9 @@ jobs:
         shell: bash
         working-directory: ./ci-cd/terraform/
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: hashicorp/setup-terraform@v3
-      - uses: aws-actions/configure-aws-credentials@v3
+      - uses: aws-actions/configure-aws-credentials@v4
         with:
           role-to-assume: arn:aws:iam::339713135307:role/GitHubActionsInfraReadOnlyRole
           role-session-name: GitHub_to_AWS_via_FederatedOIDC

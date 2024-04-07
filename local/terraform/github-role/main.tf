@@ -53,8 +53,8 @@ resource "aws_iam_role" "github_actions_administrator_role" {
   }
 }
 
-resource "aws_iam_role" "github_actions_s3_infra_read_only_role" {
-    name               = "GitHubActionsS3InfraReadOnlyRole"
+resource "aws_iam_role" "github_actions_infra_read_only_role" {
+    name               = "GitHubActionsInfraReadOnlyRole"
     assume_role_policy = jsonencode({
         Version   = "2012-10-17"
         Statement = [
@@ -75,17 +75,5 @@ resource "aws_iam_role" "github_actions_s3_infra_read_only_role" {
             },
         ]
     })
-    inline_policy {
-        name = "S3InfraReadOnlyPolicy"
-        policy = jsonencode({
-            Version   = "2012-10-17"
-            Statement = [
-                {
-                    Effect   = "Allow"
-                    Action   = "s3:GetObject"
-                    "Resource": "arn:aws:s3:::clouderizando-iac-ci-cd/*"
-                },
-            ]
-        })
-  }
+    managed_policy_arns = ["arn:aws:iam::aws:policy/ReadOnlyAccess"]
 }

@@ -29,7 +29,7 @@ jobs:
       - uses: hashicorp/setup-terraform@v3
       - uses: aws-actions/configure-aws-credentials@v3
         with:
-          role-to-assume: arn:aws:iam::339713135307:role/GitHubActionsS3InfraReadOnlyRole
+          role-to-assume: arn:aws:iam::339713135307:role/GitHubActionsInfraReadOnlyRole
           role-session-name: GitHub_to_AWS_via_FederatedOIDC
           aws-region: ${{ env.AWS_REGION }}
       - run: terraform init

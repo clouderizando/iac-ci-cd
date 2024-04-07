@@ -1,4 +1,4 @@
-name: validate-terraform
+name: ci-change terraform
 
 on:
   push:
@@ -24,8 +24,6 @@ jobs:
       run:
         shell: bash
         working-directory: ./ci-cd/terraform/
-    container:
-      image: clouderizando/ci-base:1.0.0
     steps:
       - uses: actions/checkout@v3
       - uses: hashicorp/setup-terraform@v3

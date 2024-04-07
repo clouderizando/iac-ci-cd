@@ -41,5 +41,5 @@ jobs:
         continue-on-error: true
 
       - name: Destroy resources jobs
-          id: destroy
-          run: terraform destroy -auto-approve -no-color
+        id: destroy
+        run: terraform destroy -auto-approve -no-color

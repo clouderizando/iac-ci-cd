@@ -3,7 +3,7 @@ name: ci-change terraform
 on:
   push:
     branches: 
-      - develop
+      - main
     paths:
       - ci-cd/terraform/*
   pull_request:

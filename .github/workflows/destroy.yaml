@@ -1,0 +1,45 @@
+name: Destroy terraform resources
+
+on:
+  workflow_dispatch:
+    inputs:
+      destroy:
+        description: 'Destroy resources'
+        required: true
+        default: 'true'
+
+env:
+  AWS_REGION : "us-east-1"
+
+permissions:
+  id-token: write
+  contents: read
+  pull-requests: write
+
+jobs:
+  TerraformDestroy:
+    runs-on: [self-hosted, ubuntu-latest]
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./ci-cd/terraform/
+    steps:
+      - uses: actions/checkout@v3
+      - uses: hashicorp/setup-terraform@v3
+      - uses: aws-actions/configure-aws-credentials@v3
+        with:
+          role-to-assume: arn:aws:iam::339713135307:role/GitHubActionsInfraReadOnlyRole
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Terraform Init
+        id: init
+        run: terraform init
+
+      - name: Show Destroy plan
+        run: terraform plan -destroy -no-color
+        continue-on-error: true
+
+      - name: Destroy resources jobs
+          id: destroy
+          run: terraform destroy -auto-approve -no-color

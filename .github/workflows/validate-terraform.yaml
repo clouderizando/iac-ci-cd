@@ -4,11 +4,11 @@ on:
   push:
     branches: 
       - develop
-    paths:
-      - ci-cd/terraform/*
+    # paths:
+    #   - ci-cd/terraform/*
   pull_request:
-    paths:
-      - ci-cd/terraform/*
+    # paths:
+    #   - ci-cd/terraform/*
 
 env:
   AWS_REGION : "us-east-1"

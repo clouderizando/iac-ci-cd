@@ -69,7 +69,7 @@ resource "aws_iam_role" "github_actions_infra_read_only_role" {
                         "token.actions.githubusercontent.com:aud" = "sts.amazonaws.com"
                     }
                     StringLike   = {
-                       "token.actions.githubusercontent.com:sub" = "repo:clouderizando/iac-ci-cd:ref:refs/heads/*"
+                       "token.actions.githubusercontent.com:sub" = "repo:clouderizando/iac-ci-cd:*"
                     }
                 }
             },

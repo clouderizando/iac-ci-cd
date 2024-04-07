@@ -6,6 +6,7 @@ provider "aws" {
       Terraform  = "true"
       CI         = "true"
       Repository = "https://github.com/clouderizando/iac-ci-cd"
+      IAC        = "true"
     }
   }
 }

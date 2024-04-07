@@ -1,4 +1,4 @@
-name: ci-change terraform
+name: Ci change on terraform
 
 on:
   push:

@@ -2,7 +2,7 @@ name: Release
 
 on:
   workflow_run:
-    workflows: ["ci-change terraforms"]
+    workflows: ["Ci change on terraform"]
     branches: [main]
     types: 
       - completed

@@ -30,7 +30,7 @@ jobs:
         id: init
         run: terraform init
 
-       - name: Show Destroy plan
+      - name: Show Destroy plan
         run: terraform plan -destroy -no-color
         continue-on-error: true
 

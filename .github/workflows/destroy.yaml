@@ -1,6 +1,11 @@
 name: Destroy terraform resources
 on:
   workflow_dispatch:
+    inputs:
+      destroy:
+        description: 'Destroy resources'
+        required: true
+        default: 'true'
 
 env:
   AWS_REGION : "us-east-1"

@@ -1,0 +1,42 @@
+name: validate-terraform
+
+on:
+  push:
+    branches: 
+      - develop
+    paths:
+      - ci-cd/terraform/*
+  pull_request:
+    paths:
+      - ci-cd/terraform/*
+
+env:
+  AWS_REGION : "us-east-1"
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  TerraformPlan:
+    runs-on: [self-hosted, ubuntu-latest]
+    defaults:
+      run:
+        shell: bash
+        working-directory: ./ci-cd/terraform/
+    container:
+      image: clouderizando/ci-base:1.0.0
+    steps:
+      - uses: actions/checkout@v3
+      - uses: hashicorp/setup-terraform@v3
+      - uses: aws-actions/configure-aws-credentials@v3
+        with:
+          role-to-assume: arn:aws:iam::339713135307:role/GitHubActionsS3InfraReadOnlyRole
+          role-session-name: GitHub_to_AWS_via_FederatedOIDC
+          aws-region: ${{ env.AWS_REGION }}
+      - run: terraform init
+      - id: plan
+        run: terraform plan -no-color
+      - run: echo ${{ steps.plan.outputs.stdout }}
+      - run: echo ${{ steps.plan.outputs.stderr }}
+      - run: echo ${{ steps.plan.outputs.exitcode }}
